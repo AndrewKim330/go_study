@@ -45,6 +45,8 @@ func main() {
 	total := superAdd(1, 2, 3, 4, 5)
 	fmt.Println(total)
 
+	fmt.Println(canIDrink(16))
+
 }
 
 // 220823
@@ -74,6 +76,7 @@ func lenAndUpper3(name string) (length int, uppercase string) {
 	return
 }
 
+// 220825
 func superAdd(numbers ...int) int {
 	//for idx, number := range numbers {
 	//	fmt.Println(idx, number)
@@ -87,4 +90,11 @@ func superAdd(numbers ...int) int {
 	}
 
 	return total
+}
+
+func canIDrink(age int) bool {
+	if koreanAge := age + 2; koreanAge < 18 {
+		return false
+	}
+	return true
 }
