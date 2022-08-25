@@ -40,6 +40,11 @@ func main() {
 
 	totalLength3, upperName3 := lenAndUpper3("andrew")
 	fmt.Println(totalLength3, upperName3)
+
+	// 220825
+	total := superAdd(1, 2, 3, 4, 5)
+	fmt.Println(total)
+
 }
 
 // 220823
@@ -67,4 +72,19 @@ func lenAndUpper3(name string) (length int, uppercase string) {
 	length = len(name)
 	uppercase = strings.ToUpper(name)
 	return
+}
+
+func superAdd(numbers ...int) int {
+	//for idx, number := range numbers {
+	//	fmt.Println(idx, number)
+	//}
+	//for i := 0; i < len(numbers); i++ {
+	//	fmt.Println(numbers[i])
+	//}
+	total := 0
+	for _, number := range numbers { // ignoring index
+		total += number
+	}
+
+	return total
 }
