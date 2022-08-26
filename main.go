@@ -50,6 +50,13 @@ func main() {
 	// 220826
 	fmt.Println(canIDrink2(16))
 
+	a := 2
+	b := &a
+	fmt.Println(&a, b)
+	fmt.Println(*b)
+	*b = 20
+	fmt.Println(a)
+
 }
 
 // 220823
