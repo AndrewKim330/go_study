@@ -68,6 +68,13 @@ func main() {
 	names2 = append(names2, "aaa")
 	fmt.Println(names2)
 
+	andrew := map[string]string{"name": "andrew", "age": "35"}
+	fmt.Println(andrew)
+
+	for key, value := range andrew {
+		fmt.Println(key, value)
+	}
+
 }
 
 // 220823
