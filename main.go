@@ -57,6 +57,17 @@ func main() {
 	*b = 20
 	fmt.Println(a)
 
+	// 220827
+	names := [5]string{"andrew", "ruben", "kim"}
+	names[3] = "a"
+	//names[4] = "b"
+	//names[5] = "c" -> expected to error
+	fmt.Println(names)
+	names2 := []string{"a", "b", "c"}
+	fmt.Println(names2)
+	names2 = append(names2, "aaa")
+	fmt.Println(names2)
+
 }
 
 // 220823
