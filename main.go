@@ -8,6 +8,13 @@ import (
 	"strings"
 )
 
+// 220827
+type person struct {
+	name    string
+	age     int
+	favFood []string
+}
+
 func main() {
 	fmt.Printf("Hello world! \n")
 	something.SayHello()
@@ -74,6 +81,11 @@ func main() {
 	for key, value := range andrew {
 		fmt.Println(key, value)
 	}
+
+	favFood := []string{"raisin"}
+	//andrew2 := person{"andrew", 35, favFood} // not fancy..
+	andrew2 := person{name: "andrew", age: 35, favFood: favFood} // explicitly
+	fmt.Println(andrew2)
 
 }
 
