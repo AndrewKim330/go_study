@@ -4,6 +4,7 @@ package main
 
 import (
 	"fmt"
+	"go_study/accounts"
 	"go_study/something"
 	"strings"
 )
@@ -87,6 +88,12 @@ func main() {
 	andrew2 := person{name: "andrew", age: 35, favFood: favFood} // explicitly
 	fmt.Println(andrew2)
 
+	// 220828
+	// account := accounts.BankAccount{Owner: "andrew", Balance: 1000} -> possibility of change
+	// fmt.Println(account)
+
+	account := accounts.NewAccount("andrew")
+	fmt.Println(account)
 }
 
 // 220823
