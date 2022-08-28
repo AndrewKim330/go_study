@@ -94,6 +94,21 @@ func main() {
 
 	account := accounts.NewAccount("andrew")
 	fmt.Println(account)
+	account.Deposit(10)
+	fmt.Println(account)
+
+	//account.Withdraw(20) // need to add error handling
+	//fmt.Println(account)
+
+	account.Withdraw2(20) // need to add error handling
+	fmt.Println(account)  // nothing be printed cause Go has no exception
+
+	err := account.Withdraw2(20)
+	if err != nil {
+		//log.Fatalln(err)
+		fmt.Println(err)
+	}
+
 }
 
 // 220823
