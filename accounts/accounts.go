@@ -1,6 +1,9 @@
 package accounts
 
-import "errors"
+import (
+	"errors"
+	"fmt"
+)
 
 // 220828
 
@@ -38,4 +41,21 @@ func (a *bankAccount) Withdraw2(amount int) error {
 	}
 	a.balance -= amount
 	return nil
+}
+
+// 220830
+
+// ChangeOwner of the account
+func (a *bankAccount) ChangeOwner(newOwner string) {
+	a.owner = newOwner
+}
+
+// Owner of the account
+func (a *bankAccount) Owner() string {
+	return a.owner
+}
+
+func (a *bankAccount) String() string {
+	//return "All I want for christmas"
+	return fmt.Sprint(a.Owner(), "'s account.\n Has: ", a.Balance())
 }

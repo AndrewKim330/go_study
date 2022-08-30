@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"go_study/accounts"
 	"go_study/something"
+	"log"
 	"strings"
 )
 
@@ -105,9 +106,12 @@ func main() {
 
 	err := account.Withdraw2(20)
 	if err != nil {
-		//log.Fatalln(err)
-		fmt.Println(err)
+		log.Fatalln(err)
+		//fmt.Println(err)
 	}
+
+	// 220830
+	fmt.Println(account)
 
 }
 
