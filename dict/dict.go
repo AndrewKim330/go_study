@@ -35,3 +35,30 @@ func (d Dictionary) Add(word, def string) error {
 	}
 	return nil
 }
+
+var errCantUpdate = errors.New("Can't update non-existing word")
+
+// can define variable as the way below
+//var (
+//	errNotFound = errors.New("Not Found")
+//	errWordExists = errors.New("That word already exists")
+//	errCantUpdate = errors.New("Can't update non-existing word")
+//)
+
+// Update a word
+func (d Dictionary) Update(word, definition string) error {
+	_, err := d.Search(word)
+	switch err {
+	case nil:
+		d[word] = definition
+	case errNotFound:
+		return errCantUpdate
+	}
+	return nil
+}
+
+// Delete a word
+func (d Dictionary) Delete(word string) {
+	// **code challange for error handling
+	delete(d, word)
+}
