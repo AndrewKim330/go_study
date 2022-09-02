@@ -33,7 +33,7 @@ func main() {
 	}
 	//fmt.Println(results)
 	for url, result := range results {
-		fmt.Println(url, result)
+		fmt.Println("url: ", url, "result: ", result)
 	}
 }
 
