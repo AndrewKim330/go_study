@@ -3,15 +3,19 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 	"net/http"
 )
 
+type requestResult struct {
+	url    string
+	status string
+}
+
 func main() {
-	//var results map[string]string // expected to panic error
-	//var results = map[string]string{} // would be work well
-	var results = make(map[string]string)
+	results := make(map[string]string)
+	c := make(chan requestResult)
+
 	urls := []string{
 		"https://www.airbnb.com/",
 		"https://www.google.com/",
@@ -23,28 +27,26 @@ func main() {
 	}
 	//results["hello"] = "hello"
 	for _, url := range urls {
-		//fmt.Println(url)
-		result := "OK"
-		err := hitURL(url)
-		if err != nil {
-			result = "FAILED"
-		}
-		results[url] = result
+		go hitURL(url, c)
 	}
-	//fmt.Println(results)
-	for url, result := range results {
-		fmt.Println("url: ", url, "result: ", result)
+
+	for i := 0; i < len(urls); i++ {
+		//fmt.Println(<-c)
+		result := <-c
+		results[result.url] = result.status
 	}
+	for url, status := range results {
+		fmt.Println(url, status)
+	}
+
 }
 
-var errRequestFailed = errors.New("Request Failed")
-
-func hitURL(url string) error {
-	fmt.Println("Checking: ", url)
+func hitURL(url string, c chan<- requestResult) {
+	//fmt.Println("Checking: ", url)
 	resp, err := http.Get(url)
+	status := "OK"
 	if err != nil || resp.StatusCode >= 400 {
-		fmt.Println(err, resp.StatusCode)
-		return errRequestFailed
+		status = "FAILED"
 	}
-	return nil
+	c <- requestResult{url: url, status: status}
 }
