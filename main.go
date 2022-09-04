@@ -1,52 +1,41 @@
-//220901
-
 package main
 
 import (
-	"fmt"
+	"github.com/PuerkitoBio/goquery"
+	"log"
 	"net/http"
 )
 
-type requestResult struct {
-	url    string
-	status string
-}
+// var baseURL string = "https://kr.indeed.com/jobs?q=python&l=&ts=1662298375496&rq=1&rsIdx=0&fromage=last&newcount=1541&vjk=1015284880e2ff62"
+var baseURL string = "https://www.naver.com"
 
 func main() {
-	results := make(map[string]string)
-	c := make(chan requestResult)
-
-	urls := []string{
-		"https://www.airbnb.com/",
-		"https://www.google.com/",
-		"https://www.amazon.com/",
-		"https://www.reddit.com/",
-		"https://soundcloud.com/",
-		"https://www.instagram.com/",
-		"https://www.facebook.com/",
-	}
-	//results["hello"] = "hello"
-	for _, url := range urls {
-		go hitURL(url, c)
-	}
-
-	for i := 0; i < len(urls); i++ {
-		//fmt.Println(<-c)
-		result := <-c
-		results[result.url] = result.status
-	}
-	for url, status := range results {
-		fmt.Println(url, status)
-	}
-
+	getPages()
 }
 
-func hitURL(url string, c chan<- requestResult) {
-	//fmt.Println("Checking: ", url)
-	resp, err := http.Get(url)
-	status := "OK"
-	if err != nil || resp.StatusCode >= 400 {
-		status = "FAILED"
+func getPages() int {
+	res, err := http.Get(baseURL)
+	checkErr(err)
+	checkCode(res)
+
+	defer res.Body.Close()
+
+	doc, err := goquery.NewDocumentFromReader(res.Body)
+	checkErr(err)
+
+	doc.find(".pagination").Each()
+
+	return 0
+}
+
+func checkErr(err error) {
+	if err != nil {
+		log.Fatalln(err)
 	}
-	c <- requestResult{url: url, status: status}
+}
+
+func checkCode(res *http.Response) {
+	if res.StatusCode != 200 {
+		log.Fatalln("Request failed with status: ", res.StatusCode)
+	}
 }
