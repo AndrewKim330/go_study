@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/PuerkitoBio/goquery"
 	"log"
 	"net/http"
@@ -24,6 +25,8 @@ func getPages() int {
 	checkErr(err)
 
 	doc.find(".pagination").Each()
+
+	fmt.Println("test")
 
 	return 0
 }
