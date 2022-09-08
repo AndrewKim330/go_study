@@ -7,9 +7,9 @@ import (
 	"net/http"
 )
 
-var baseURL string = "https://kr.indeed.com/jobs?q=python&pp=gQAAAAABgw4BhzcAAAAB5CLxrwADAAABAAA&vjk=d364360d1e0368e3"
+//var baseURL string = "https://kr.indeed.com/jobs?q=python&limit=50&start=9999"
 
-//var baseURL string = "https://www.naver.com"
+var baseURL string = "https://www.naver.com"
 
 func main() {
 	getPages()
@@ -25,9 +25,9 @@ func getPages() int {
 	doc, err := goquery.NewDocumentFromReader(res.Body)
 	checkErr(err)
 
-	//doc.Find(".pagination").Each()
-
-	fmt.Println(doc)
+	doc.Find(".search_area").Each(func(i int, s *goquery.Selection) {
+		fmt.Println(s.Html())
+	})
 
 	return 0
 }
